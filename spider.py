@@ -28,8 +28,6 @@ class OlxSpider(Spider):
     initial_urls = []
 
     def task_initial(self, grab: Grab, task: Task):
-        grab.setup(proxy='http://127.0.0.1:8080', proxy_type='https', timeout=1)
-
         for url in grab.doc.select(".//*[@id='offers_table']//*/td[1]/a/@href"):
             yield Task('detail', url=url.text())
 
