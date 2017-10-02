@@ -35,6 +35,6 @@ def send_email(order_id, req_crawl_id):
 
     order = Order.objects.get(pk=order_id)
     send_mail('Результат сбора статистики',
-              'Ссылка на график - {}'.format(reverse('web.views.charts', args=(req_crawl_id,)),
-              from_email=EMAIL_HOST_USER, recipient_list=[order.email]))
+              'Ссылка на график - {}'.format(reverse('web.views.charts', args=(req_crawl_id,))),
+              from_email=EMAIL_HOST_USER, recipient_list=[order.email])
     order.delete()
