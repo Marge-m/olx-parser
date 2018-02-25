@@ -49,7 +49,7 @@ python -m celery -A olx_stats.celery worker --loglevel INFO
 
 8. Подписываемся и наслаждаемся спамом. 
 
-9. Команды для очистки:
+9. Команды для очистки Celery и RabbitMQ:
 
 ```
 celery -A olx_stats purge 
