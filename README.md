@@ -7,7 +7,7 @@
 virtualenv venv -p python3.5
 source venv/bin/activate
 git clone https://github.com/Marge-m/olx-parser/
-cd olx_stats
+cd olx-parser/olx_stats
 ```
 
 В settings.py пишем токен бота (переменная TOKEN)
