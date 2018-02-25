@@ -45,7 +45,6 @@ SECRET_KEY = 'czep8b_&_j)+s%*)2vy4vym*hlx+m3q953uaqrsq-ve=nl%j2n'
 DEBUG = True
 NGROK = '***.ngrok.io'
 TOKEN = ''
-# https://api.telegram.org/bot410501842:AAErQMVaONZHH1m0e78gCCF7wFmlSuCgU44/setwebhook?url=https://5d350710.ngrok.io/
 ALLOWED_HOSTS = ['0.0.0.0', NGROK, '127.0.0.1']
 
 
