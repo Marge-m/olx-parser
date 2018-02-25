@@ -20,12 +20,12 @@ cd olx_stats
 
 Адрес вносим в settings.py в переменную NGROK.
 
-3. Делаем вебхук:
+3. Делаем webhook:
 
 Заходим на 
 https://api.telegram.org/bot{ТОКЕНБОТА}/setwebhook?url=https://{****}.ngrok.io/
 
-4. 
+
 ```
 4. pip install -r requirements.txt
 ```
