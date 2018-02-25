@@ -30,6 +30,9 @@ def send_url_to_teleuser(subscription_id):
 
 
 def create_request_crawling(subscription_id):
+    """
+    Parse category every 20 seconds
+    """
     schedule, created = IntervalSchedule.objects.get_or_create(
         every=20,
         period=IntervalSchedule.SECONDS,

@@ -17,10 +17,13 @@ class OlxSpider(Spider):
         teleuser = self.meta.get('teleuser')
         if_newuser = self.meta.get('if_newuser')
         for url in grab.doc.select(".//*[@id='offers_table']//*/td[1]/a/@href"):
+            # if url was already sent to user - break parsing
             if SentUrls.objects.filter(teleuser=teleuser, url=url.text().split('.html')[0] + '.html').exists():
                 print('Новых объявлений нет')
                 return
+            # send url to subscribed user
             send_url(url.text())
+            # if user just subscribed than send to him last ad in category and break
             if if_newuser:
                 return
         try:

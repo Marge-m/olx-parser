@@ -40,6 +40,7 @@ def send_options(m):
 @csrf_exempt
 @bot.message_handler(commands=['subscribe'])
 def send_menu(m):
+    # keyboard with category buttons
     keyboard = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True)
     keyboard.add(*[telebot.types.KeyboardButton(name) for name in category_names])
     msg = bot.send_message(m.chat.id, 'Выберите категорию',
