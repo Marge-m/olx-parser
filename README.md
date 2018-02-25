@@ -12,7 +12,7 @@ cd olx-parser/olx_stats
 
 В settings.py пишем токен бота (переменная TOKEN)
 
-2. Устанавливаем ngrok и запускаем
+2. Устанавливаем ngrok (Качаем https://ngrok.com/download + unzip) и запускаем
 
 ```
 ./ngrok http 8080
