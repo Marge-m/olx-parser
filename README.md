@@ -12,7 +12,7 @@ cd olx_stats
 
 В settings.py пишем токен бота (переменная TOKEN)
 
-2. Устанавливаем ngrok
+2. Устанавливаем ngrok и запускаем
 
 ```
 ./ngrok http 8080
@@ -27,7 +27,7 @@ https://api.telegram.org/bot{ТОКЕНБОТА}/setwebhook?url=https://{****}.n
 
 4. 
 ```
-pip install -r requirements.txt
+4. pip install -r requirements.txt
 ```
 
 5. Запускаем в 4х окнах терминала команды:
@@ -50,6 +50,10 @@ python -m celery -A olx_stats.celery worker --loglevel INFO
 
 9. Команды для очистки:
 
+```
 celery -A olx_stats purge 
+
 rabbitmqadmin list queues name
+
 rabbitmqadmin delete queue name='{DAT_NAME}'
+```
