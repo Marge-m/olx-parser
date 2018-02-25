@@ -35,11 +35,12 @@ https://api.telegram.org/bot{ТОКЕНБОТА}/setwebhook?url=https://{****}.n
 ```
 sudo rabbitmq-server
 
+./prepare.sh
+
 python -m celery -A olx_stats.celery  beat --loglevel INFO --scheduler=django_celery_beat.schedulers:DatabaseScheduler
 
 python -m celery -A olx_stats.celery worker --loglevel INFO
 
-./prepare.sh
 ```
 
 6. Добавляем бота в Телеграмм  t.me/olxfeeds_bot
