@@ -6,7 +6,7 @@
 ```
 virtualenv venv -p python3.5
 source venv/bin/activate
-git clone https://marge-m284@bitbucket.org/marge-m284/olx-parser.git
+git clone https://github.com/Marge-m/olx-parser/
 cd olx_stats
 ```
 
