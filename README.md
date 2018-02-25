@@ -57,4 +57,8 @@ celery -A olx_stats purge
 rabbitmqadmin list queues name
 
 rabbitmqadmin delete queue name='{DAT_NAME}'
+
+ps aux|grep celery
+ps aux|grep rabbit
+sudo kill -9 {PID}
 ```
