@@ -1,21 +1,15 @@
 from django.contrib import admin
 
 # Register your models here.
-from web.models import RequestCrawling, CreationTime, Order
+from web.models import Subscription, SentUrls
+
+class AdminSubscription(admin.ModelAdmin):
+    list_display = ('pk', 'url', 'teleuser', 'if_newuser')
 
 
-class AdminRequestCrawling(admin.ModelAdmin):
-    list_display = ('pk', 'url', 'is_finished')
+class AdminSentUrls(admin.ModelAdmin):
+    list_display = ('pk', 'url', 'teleuser')
 
 
-class AdminCreationTime(admin.ModelAdmin):
-    list_display = ('time', 'request_crawling')
-
-
-class AdminOrder(admin.ModelAdmin):
-    list_display = ('url', 'email')
-
-
-admin.site.register(RequestCrawling, AdminRequestCrawling)
-admin.site.register(CreationTime, AdminCreationTime)
-admin.site.register(Order, AdminOrder)
+admin.site.register(SentUrls, AdminSentUrls)
+admin.site.register(Subscription, AdminSubscription)

@@ -1,53 +1,30 @@
+# coding=utf-8
 import logging
-
-from datetime import datetime
-from time import sleep
 
 from grab import Grab
 from grab.spider import Spider, Task
 
+
 logging.basicConfig(level=logging.DEBUG)
-
-
-def get_datetime(str_time, str_date):
-    day, month, year = str_date.split(' ')
-    hour, minute = str_time.split(':')
-    mos = ('янв', 'фев', 'март', 'апр',
-           'май', 'июн', 'июл', 'авг',
-           'сент','окт', 'ноябр', 'декабр')
-
-    for i, m in enumerate(mos):
-        if m in month:
-            month = i + 1
-            break
-
-    return datetime(minute=int(minute), hour=int(hour), day=int(day), month=month, year=int(year))
 
 
 class OlxSpider(Spider):
     initial_urls = []
 
     def task_initial(self, grab: Grab, task: Task):
+        from web.models import SentUrls
+        send_url = self.meta.get('send_url')
+        teleuser = self.meta.get('teleuser')
+        if_newuser = self.meta.get('if_newuser')
         for url in grab.doc.select(".//*[@id='offers_table']//*/td[1]/a/@href"):
-            yield Task('detail', url=url.text())
-
+            if SentUrls.objects.filter(teleuser=teleuser, url=url.text().split('.html')[0] + '.html').exists():
+                print('Новых объявлений нет')
+                return
+            send_url(url.text())
+            if if_newuser:
+                return
         try:
             next_page = grab.doc.select(".//*[contains(@class, 'next')]/a[contains(@class, 'pageNextPrev')]/@href").one().text()
             yield Task('initial', url=grab.make_url_absolute(next_page))
         except IndexError as e:
             pass
-
-    def task_detail(self, grab: Grab, task: Task):
-        store = self.meta.get('store')
-
-        try:
-            time, date = grab.doc.rex_search(r'\d\d:\d\d.*20\d{2}').group(0).split(', ')
-            creation_time = get_datetime(time, date)
-            store(creation_time)
-        except Exception as ex:
-            print(ex)
-
-        # anti ban
-        sleep(8)
-
-

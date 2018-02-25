@@ -15,15 +15,25 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-CELERY_BROKER_URL = 'amqp://admin:mypass@rabbit:5672//'
+#CELERY_BROKER_URL = 'amqp://admin:mypass@rabbit:5672//'
+CELERY_BROKER_URL = 'amqp://localhost'
+# REDIS related settings
+# REDIS_HOST = 'localhost'
+# REDIS_PORT = '6379'
+# CELERY_BROKER_URL = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
+# BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}
+# CELERY_RESULT_BACKEND = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
+
 
 CELERY_TASK_SERIALIZER = 'pickle'
 CELERY_RESULT_SERIALIZER = 'pickle'
 
 CELERY_ACCEPT_CONTENT = ['pickle']
-CELERY_TIMEZONE = 'Europe/Moscow'
+CELERY_TIMEZONE = 'UTC'
 CELERY_ENABLE_UTC = True
 CELERY_IMPORTS = ('web.tasks', )
+CELERY_RESULT_BACKEND = 'rpc://'
+CELERYBEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
@@ -33,8 +43,10 @@ SECRET_KEY = 'czep8b_&_j)+s%*)2vy4vym*hlx+m3q953uaqrsq-ve=nl%j2n'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = []
+NGROK = '***.ngrok.io'
+TOKEN = ''
+# https://api.telegram.org/bot410501842:AAErQMVaONZHH1m0e78gCCF7wFmlSuCgU44/setwebhook?url=https://5d350710.ngrok.io/
+ALLOWED_HOSTS = ['0.0.0.0', NGROK, '127.0.0.1']
 
 
 # Application definition
@@ -46,7 +58,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'web'
+    'web',
+    'django_celery_beat',
 ]
 
 MIDDLEWARE = [
